@@ -1,0 +1,30 @@
+name: Kivy APK Build
+
+on: [push]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install buildozer and dependencies
+      run: |
+        pip install --upgrade buildozer cython
+
+    - name: Run buildozer
+      run: |
+        buildozer -v android debug
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: radiology-assistant-apk
+        path: bin/*.apk
