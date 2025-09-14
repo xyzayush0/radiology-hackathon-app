@@ -24,7 +24,8 @@ jobs:
         buildozer -v android debug
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # <-- THE ONLY CHANGE IS HERE (v3 to v4)
       with:
         name: radiology-assistant-apk
         path: bin/*.apk
+
